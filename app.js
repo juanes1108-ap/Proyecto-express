@@ -9,6 +9,7 @@ const app = express();
 const port = process.env.PUERTO || 5050;
 //uso de middleware bode-parse
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send(`Aprendiendo express, ficha 3407181, ADSO en el curso de desarrollo web el 31 de julio de 2026`);
@@ -101,6 +102,15 @@ app.post("/login", (req, res) => {
     });
   }
 });
+
+//formulario
+app.post("/formulario", (req, res) => {
+  const datosFormulario = req.body
+  //capturar los datos individualmente
+  
+  const miNombre = req.body.nombre1
+  res.status(200).json({ mensaje: "Datos recibidos", nombre: miNombre })
+})
 
 
 app.listen(port, function() {
