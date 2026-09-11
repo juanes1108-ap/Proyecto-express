@@ -1,36 +1,53 @@
 const express = require('express');
 const app = express();
 require("dotenv/config");
+
 const PUERTO = process.env.PUERTO || 5000;
-//configurar para lectura del archivo
+
+// Middleware para que Express entienda JSON en las peticiones POST
+app.use(express.json());
+
 const sistemaArchivo = require("fs");
 const ruta = require("path");
 const rutaArchivoJson = ruta.join(__dirname, "datos.json");
 
-
-//endpointraiz
+// Endpoint raíz
 app.get("/", function(req, res) {
   res.send('API Rest - Aprendices');
 });
 
-//endpoint para ver los datos del archivo
-app.get("/api/aprendices", function(req, res)  {
-  //los datos se pueden traer de una base de datos, de un archivo,etc
+// Endpoint para VER los datos del archivo
+app.get("/api/aprendices", function(req, res) {
   sistemaArchivo.readFile(rutaArchivoJson, "utf8", function(error, datos) {
     if (error) {
-      return res.json({error:"Error al leer los datos"});
+      return res.status(500).json({ error: "Error al leer los datos" });
     }
     const listaAprendices = JSON.parse(datos);
     res.json(listaAprendices);
   });
 });
 
-//endpoint para agregar un aprendiz
+// Endpoint para AGREGAR un aprendiz
 app.post("/api/aprendices", (req, res) => {
-  res.json({Mensaje: "trabajando en el endpoint"})
+  const nuevoAprendiz = req.body; // Recibe los datos enviados en la petición
+
+  sistemaArchivo.readFile(rutaArchivoJson, "utf8", (error, datos) => {
+    if (error) {
+      return res.status(500).json({ error: "Error al leer los datos" });
+    }
+
+    const listaAprendices = JSON.parse(datos);
+    listaAprendices.push(nuevoAprendiz);
+
+    sistemaArchivo.writeFile(rutaArchivoJson, JSON.stringify(listaAprendices, null, 2), (error) => {
+      if (error) {
+        return res.status(500).json({ error: "No se pudo guardar el aprendiz" });
+      }
+      res.status(201).json({ Mensaje: "Aprendiz agregado correctamente" });
+    });
+  });
 });
 
-
-app.listen(PUERTO, () =>{
+app.listen(PUERTO, () => {
   console.log(`Servidor en funcionamiento en el puerto: http://localhost:${PUERTO}`);
 });
