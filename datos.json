@@ -38,5 +38,17 @@
     "nombre": "nuevoaprendiz",
     "cargo": "aprendiz",
     "correo": "nuevocorreo@gmail.com"
+  },
+  {
+    "nombre": "aprendiz1",
+    "edad": "21",
+    "correo": "aprendiz1@gmail.com",
+    "imagen": "/misimagenes/1789139622215.png"
+  },
+  {
+    "nombre": "aprendiz2",
+    "edad": "22",
+    "correo": "aprendiz2@gmail.com",
+    "imagen": "/misimagenes/1789140454421.png"
   }
 ]
