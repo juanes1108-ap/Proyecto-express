@@ -50,5 +50,12 @@
     "edad": "22",
     "correo": "aprendiz2@gmail.com",
     "imagen": "/misimagenes/1789140454421.png"
+  },
+  {
+    "nombre": "aprendiz123",
+    "correo": "aprendiz123@gmail.com",
+    "cargo": "aprendiz",
+    "id": "id-mtx72y7ofjw7w",
+    "imagen": "sin imagen"
   }
 ]

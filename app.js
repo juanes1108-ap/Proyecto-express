@@ -1,14 +1,18 @@
 const express = require('express');
 const app = express();
 require("dotenv/config");
-//importacion de validaciones
+//importacion de validaciones||||||||||||||||
 const { validarAprendiz, generarId } = require("./utilidades/validaciones");
+
+//importar middleware de registro
+const registroMiddleware = require("./middleware/registroMiddleware");
+app.use(registroMiddleware);
 
 const PUERTO = process.env.PUERTO || 5000;
 
-//importar libreria para subir archivos
+//importar libreria para subir archivos|||||||||||||||||
 const multer = require("multer");
-//configurar aalmacenamiento de archivos
+//configurar aalmacenamiento de archivos||||||||||||||||
 const almacenamiento = multer.diskStorage(
   {destination: (req, file, cb) => {
     cb(null,"misimagenes")
@@ -21,10 +25,21 @@ const almacenamiento = multer.diskStorage(
 
 const SubirArchivo = multer({storage: almacenamiento});
 
-// Middleware para que Express entienda JSON en las peticiones POST
+// Middleware para que Express entienda JSON en las peticiones POST|||||||||||||||||||
 app.use(express.json());
-// Middleware para que Express entienda datos codificados en URL (formulario)
+// Middleware para que Express entienda datos codificados en URL (formulario)|||||||||||||||
 app.use(express.urlencoded({ extended: true }));
+
+
+
+// Middleware creados|||||||||||||||||||||||||||||||||
+app.use((req, res, next) => {
+  console.log(`tiempo milisegundos: ${Date.now()}`);
+  console.log(`fecha: ${new Date().toISOString()}`);
+  next();
+});
+
+
 
 
 //configurar para lectura de archivos
@@ -37,7 +52,7 @@ app.get("/", function(req, res) {
   res.send('API Rest - Aprendices');
 });
 
-// Endpoint para VER los datos del archivo
+// Endpoint para VER los datos del archivo|||||||||||||
 app.get("/api/aprendices", function(req, res) {
   sistemaArchivo.readFile(rutaArchivoJson, "utf8", function(error, datos) {
     if (error) {
@@ -48,7 +63,7 @@ app.get("/api/aprendices", function(req, res) {
   });
 });
 
-// Endpoint para AGREGAR un aprendiz
+// Endpoint para AGREGAR un aprendiz||||||||||||||||||||||||||||||||||
 app.post("/api/aprendices", SubirArchivo.single("imagen"), (req, res) => {
   const nuevoAprendiz = req.body; // Recibe los datos enviados en la petición
 
@@ -61,7 +76,7 @@ app.post("/api/aprendices", SubirArchivo.single("imagen"), (req, res) => {
     });
   }
 
-  // Generar ID automático
+  // Generar ID automático|||||||||||||||||||||||
   nuevoAprendiz.id = generarId();
   nuevoAprendiz.imagen = req.file ? `/misimagenes/${req.file.filename}` : "sin imagen";
 
@@ -81,6 +96,18 @@ app.post("/api/aprendices", SubirArchivo.single("imagen"), (req, res) => {
     });
   });
 });
+
+
+
+//endpoint para modificar aprendices
+app.put("/api/aprendices/:id", (req, res) => {
+  res.status(200).json({ Mensaje: "endpoint en contruccion para modificar aprendices" });
+});
+//endpoint para eliminar aprendices
+app.delete("/api/aprendices/:id", (req, res) => {
+  res.status(200).json({ Mensaje: "endpoint en contruccion de eliminar aprendices" });
+});
+
 
 app.listen(PUERTO, () => {
   console.log(`Servidor en funcionamiento en el puerto: http://localhost:${PUERTO}`);
