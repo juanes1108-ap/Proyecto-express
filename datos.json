@@ -1,16 +1,42 @@
 [
-    {
-        "dni": "12345678",
-        "nombre": "Juan",
-        "apellido": "Pérez",
-        "correo": "juan.perez@example.com",
-        "imagen": "foto1.jpg"
-    },
-    {
-        "dni": "87654321",
-        "nombre": "María",
-        "apellido": "Gómez",
-        "correo": "maria.gomez@example.com",
-        "imagen": "foto2.jpg"
-    }
+  {
+    "dni": "12345678",
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "correo": "juan.perez@example.com",
+    "imagen": "foto1.jpg"
+  },
+  {
+    "dni": "87654321",
+    "nombre": "María",
+    "apellido": "Gómez",
+    "correo": "maria.gomez@example.com",
+    "imagen": "foto2.jpg"
+  },
+  {
+    "nombre": "juan",
+    "apellido": "perez",
+    "correo": "juanes@gmail.com"
+  },
+  null,
+  {
+    "nombre": "juanes",
+    "email": "juanes@mail.com",
+    "cargo": "aprendiz"
+  },
+  {
+    "nombre": "nuevo aprendiz",
+    "cargo": "aprendiz"
+  },
+  {
+    "nombre": "alguien nuevo",
+    "email": "alguienuevo@gmail.com",
+    "cargo": "aprendiz"
+  },
+  {},
+  {
+    "nombre": "nuevoaprendiz",
+    "cargo": "aprendiz",
+    "correo": "nuevocorreo@gmail.com"
+  }
 ]

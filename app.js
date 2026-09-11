@@ -4,9 +4,15 @@ require("dotenv/config");
 
 const PUERTO = process.env.PUERTO || 5000;
 
+//importar libreria para subir archivos
+const multer = require("multer");
+
+
 // Middleware para que Express entienda JSON en las peticiones POST
 app.use(express.json());
-
+// Middleware para que Express entienda datos codificados en URL (formulario)
+app.use(express.urlencoded({ extended: true }));
+//configurar para lectura de archivos
 const sistemaArchivo = require("fs");
 const ruta = require("path");
 const rutaArchivoJson = ruta.join(__dirname, "datos.json");
