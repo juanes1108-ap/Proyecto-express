@@ -7,14 +7,14 @@ require("dotenv/config");
 const jwt = require("jsonwebtoken")
 
 // Importación de validaciones y middlewares
-const { validarAprendiz, generarId } = require("./utilidades/validaciones");
-const registroMiddleware = require("./middleware/registroMiddleware");
-const autenticadorMiddleware = require("./middleware/autenticadorMiddleware")
+const { validarAprendiz, generarId } = require("./src/utilidades/validaciones");
+const registroMiddleware = require("./src/middleware/registroMiddleware");
+const autenticadorMiddleware = require("./src/middleware/autenticadorMiddleware")
 
 // Importación del manejador de errores
 // Nota: Si en manejadorErrores.js exportas con "module.exports = { manejadorErrores }", 
 // usa: const { manejadorErrores } = require("./middleware/manejadorErrores");
-const manejadorErrores = require("./middleware/manejadorErrores");
+const manejadorErrores = require("./src/middleware/manejadorErrores");
 
 const PUERTO = process.env.PUERTO || 5000;
 
